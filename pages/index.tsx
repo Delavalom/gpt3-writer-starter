@@ -41,13 +41,12 @@ const Home = () => {
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>Startup scripts generator</h1>
+            <h1>Headlines Generator</h1>
           </div>
           <br />
           <div className="header-subtitle">
             <h2>
-              Input what ever you need to write to give the form you want to
-              your startup
+              Write what you build in your startup, be specific.
             </h2>
           </div>
           <br />
@@ -55,7 +54,7 @@ const Home = () => {
             <textarea
               value={userInput}
               onChange={onUserChangedText}
-              placeholder="start typing here"
+              placeholder="AI models to help manage inventory."
               className="prompt-box"
             />
             <div className="prompt-buttons">

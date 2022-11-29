@@ -6,15 +6,15 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration)
 
-const basePromptPrefix = "";
+const basePromptPrefix = "Write a list of short landing page headlines in the style of success for a startup. Write the copy to appeal to buyers. Don't include confusing terms like AI in it. The startup builds the following:";
 
 const generateAction = async (request, response) => {
     console.log(`API {basePromptPrefix}${request.body.userInput}`)
 
     const baseCompletion = await openai.createCompletion({
         model: 'text-davinci-003',
-        prompt: `${basePromptPrefix}${request.body.userInput}`,
-        temperature: 0.7,
+        prompt: `${basePromptPrefix} ${request.body.userInput}.\n`,
+        temperature: 0.8,
         max_tokens: 250,
     })
 
