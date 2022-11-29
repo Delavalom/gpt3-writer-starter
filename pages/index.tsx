@@ -1,16 +1,33 @@
 import Head from "next/head";
 import Image from "next/image";
-import React, {
-  ChangeEvent,
-  ReactEventHandler,
-  SetStateAction,
-  useRef,
-  useState,
-} from "react";
+import React, { ChangeEvent, useState } from "react";
 import buildspaceLogo from "../assets/buildspace-logo.png";
 
 const Home = () => {
   const [userInput, setUserInput] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [apiOutput, setApiOutput] = useState("");
+
+  const callGenerateEndpoint = async () => {
+    setIsGenerating(true);
+
+    console.log("calling OpenAI...");
+
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userInput }),
+    });
+
+    const data = await response.json();
+    const { output } = data;
+    console.log("Openai replied...", output.text);
+
+    setApiOutput(`${output.text}`);
+    setIsGenerating(false);
+  };
 
   const onUserChangedText = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setUserInput(event.target.value);
@@ -28,7 +45,10 @@ const Home = () => {
           </div>
           <br />
           <div className="header-subtitle">
-            <h2>Input what ever you need to write to give the form you want to your startup</h2>
+            <h2>
+              Input what ever you need to write to give the form you want to
+              your startup
+            </h2>
           </div>
           <br />
           <div className="prompt-container">
@@ -39,12 +59,33 @@ const Home = () => {
               className="prompt-box"
             />
             <div className="prompt-buttons">
-              <a className="generate-button" onClick={null}>
+              <a
+                className={
+                  isGenerating ? "generate-button loading" : "generate-button"
+                }
+                onClick={callGenerateEndpoint}
+              >
                 <div className="generate">
-                  <p>Generate</p>
+                  {isGenerating ? (
+                    <span className="loader"></span>
+                  ) : (
+                    <p>Generate</p>
+                  )}
                 </div>
               </a>
-            </div> 
+            </div>
+            {apiOutput && (
+              <div className="output">
+                <div className="output-header-container">
+                  <div className="output-header">
+                    <h3>Output</h3>
+                  </div>
+                </div>
+                <div className="output-content">
+                  <p>{apiOutput}</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
