@@ -1,9 +1,10 @@
+import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import React, { ChangeEvent, useState } from "react";
 import buildspaceLogo from "../assets/buildspace-logo.png";
 
-const Home = () => {
+const Home: NextPage = () => {
   const [userInput, setUserInput] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [apiOutput, setApiOutput] = useState("");

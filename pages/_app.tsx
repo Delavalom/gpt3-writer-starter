@@ -1,6 +1,7 @@
+import { type AppType } from "next/app";
 import './styles.css';
 
-function App({ Component, pageProps }) {
+const MyApp: AppType = ({ Component, pageProps }) => {
   return <Component {...pageProps} />
 }
-export default App;
+export default MyApp;
