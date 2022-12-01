@@ -42,12 +42,12 @@ const Home: NextPage = () => {
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>Headlines Generator</h1>
+            <h1>Repository Descriptions Generator</h1>
           </div>
           <br />
           <div className="header-subtitle">
             <h2>
-              Write what you build in your startup, be specific.
+              Get your pitch description for your builds.
             </h2>
           </div>
           <br />
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
             <textarea
               value={userInput}
               onChange={onUserChangedText}
-              placeholder="AI models to help manage inventory."
+              placeholder="Twitter clone with the latest tecnologies..."
               className="prompt-box"
             />
             <div className="prompt-buttons">
